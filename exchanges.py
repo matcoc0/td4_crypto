@@ -1,29 +1,23 @@
 from Client import Client
 from server import Server
 
-# Paramètres
+# parameters and initializatino
 bits = 512
 n_elements = 10
 index_to_retrieve = 4
-
-# Initialisation
 client = Client(bits)
 server = Server(n_elements)
 
-# Le client prépare la requête
-v, pk = client.request(n_elements, index_to_retrieve)
+v, pk = client.request(n_elements, index_to_retrieve) # preparation of request of client 
 
-# Le serveur répond
-response = server.answerRequest(v, pk)
+response = server.answerRequest(v, pk) # answer of server
 
 # Le client déchiffre la réponse
-retrieved = client.decryptAnswer(response)
+retrieved = client.decryptAnswer(response) # decrypting of answer
 
-# Affichage
-print("Index demandé:", index_to_retrieve)
-print("Valeur attendue:", server.database[index_to_retrieve])
-print("Valeur récupérée:", retrieved)
+print("Asked index:", index_to_retrieve)
+print("Expected value:", server.database[index_to_retrieve])
+print("Real value:", retrieved)
 
-# Vérification
-assert retrieved == server.database[index_to_retrieve]
-print("Réponse correcte !")
+assert retrieved == server.database[index_to_retrieve] # check that answer is good
+print("Good answer!")
