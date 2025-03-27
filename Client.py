@@ -7,8 +7,8 @@ class Client:
 
     def request(self, db_size, index):
         """
-        Crée un vecteur chiffré v où seul l'élément à l'index donné est E(1), les autres E(0).
-        Retourne (v, public_key) pour envoi au serveur.
+        Creates a encrypted vector v where the only element in the given index is E(1), the others are E(0).
+        It returns (v, public_key) to send it to the server.
         """
         v = []
         for i in range(db_size):
