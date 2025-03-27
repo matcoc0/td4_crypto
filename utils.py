@@ -3,29 +3,24 @@ from Crypto.Hash import SHA256
 from Crypto.Signature import DSS
 
 def string_to_bytes(str: str):
-    """Converts string to bytes."""
-    return bytes(str, 'utf-8')
+    return bytes(str, 'utf-8') # conversion of string into bytes
 
 def bytes_to_string(b):
-    return b.decode("utf-8")
+    return b.decode("utf-8") # inverse process
 
 def int_to_bytes(n):
-    """Converts int to bytes."""
-    return n.to_bytes((n.bit_length() + 7) // 8, 'big')
+    return n.to_bytes((n.bit_length() + 7) // 8, 'big') # encrypted first message * second message encrypted modulo n^2
 
 
 def bytes_to_int(nb):
-    """Converts bytes to int."""
-    return int.from_bytes(nb, 'big')
+    return int.from_bytes(nb, 'big') # conversion of bytes into int
 
 
 def string_to_int(str: str):
-    """Converts string to int."""
-    return bytes_to_int(string_to_bytes(str))
+    return bytes_to_int(string_to_bytes(str)) # conversion of string into int
 
 def int_to_string(n):
-    """Converts int to string."""
-    return bytes_to_string(int_to_bytes(n))
+    return bytes_to_string(int_to_bytes(n)) # conversion of int into string
 
 def sign_message(key, bytes_message):
     hash_obj = SHA256.new(bytes_message)
