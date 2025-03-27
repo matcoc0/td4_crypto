@@ -8,9 +8,9 @@ class Server:
 
     def answerRequest(self, v, public_key):
         """
-        v : vecteur de requête envoyé par le client (liste de chiffrés)
-        public_key : tuple (n, g) de la clé publique du client
-        Retourne E(T[i]) sans savoir i.
+        v : request vector send by client - list of numbers
+        public_key : tuple (n,g) of the client's public key
+        Permits to return E(T[i]) while assuring the server doesn't now i, which means the exact request of the client
         """
         n, g = public_key
         n2 = n * n
