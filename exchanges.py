@@ -1,4 +1,4 @@
-from client import Client
+from Client import Client
 from server import Server
 
 # Paramètres
@@ -26,4 +26,4 @@ print("Valeur récupérée:", retrieved)
 
 # Vérification
 assert retrieved == server.database[index_to_retrieve]
-print("✅ Réponse correcte !")
+print("Réponse correcte !")

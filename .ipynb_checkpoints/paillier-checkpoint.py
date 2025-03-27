@@ -41,26 +41,26 @@ class Paillier:
         return (l * self.mu) % self.n
 
 
-# test phase
+# Test de base
 test = Paillier(512)
-m = "messagetoencrypt"
+m = "Trying to encrypt this message using Paillier"
 c = test.encrypt(string_to_int(m))
 assert(int_to_string(test.decrypt(c)) == m)
 
-# proprieties
-m1 = 123 # first message 
-m2 = 456 # second message 
-c1 = test.encrypt(m1) # first message encrypted
-c2 = test.encrypt(m2) # second message encrypted
+# Propriétés homomorphes
+m1 = 123
+m2 = 456
+c1 = test.encrypt(m1)
+c2 = test.encrypt(m2)
 
-## Addition homomorphe : E(m1) * E(m2) mod n^2 = E(m1 + m2)
-add_cipher = (c1 * c2) % test.n2 # encyptions addition : first message encrypted * second message encrypted modulo n
-assert(test.decrypt(add_cipher) == (m1 + m2) % test.n) # check of result
+# Addition homomorphe : E(m1) * E(m2) mod n^2 = E(m1 + m2)
+add_cipher = (c1 * c2) % test.n2
+assert(test.decrypt(add_cipher) == (m1 + m2) % test.n)
 
-## Addition d’un message clair : E(m1) * g^m2 = E(m1 + m2)
-add_plain = (c1 * gmpy2.powmod(test.g, m2, test.n2)) % test.n2 #addition of message : Encrypted message 1 *
+# Addition d’un message clair : E(m1) * g^m2 = E(m1 + m2)
+add_plain = (c1 * gmpy2.powmod(test.g, m2, test.n2)) % test.n2
 assert(test.decrypt(add_plain) == (m1 + m2) % test.n)
 
-## Multiplication par un scalaire : E(m1)^m2 = E(m1 * m2)
-mul_plain = gmpy2.powmod(c1, m2, test.n2) # multiplication by scalar : E(m1)^m2
-assert(test.decrypt(mul_plain) == (m1 * m2) % test.n) # test of result
+# Multiplication par un scalaire : E(m1)^m2 = E(m1 * m2)
+mul_plain = gmpy2.powmod(c1, m2, test.n2)
+assert(test.decrypt(mul_plain) == (m1 * m2) % test.n)
